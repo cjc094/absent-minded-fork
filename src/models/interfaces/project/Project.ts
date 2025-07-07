@@ -4,6 +4,7 @@ interface Project {
     ownerId: string;
     participants: string[];
     rootTask: string;
+    url?: string; 
 }
 
 export default Project;

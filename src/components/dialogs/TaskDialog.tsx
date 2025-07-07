@@ -22,6 +22,7 @@ const TaskDialog = ({ id, data }: { id: string; data: TaskData }) => {
     const [start, setStart] = useState(
         data.start ? new Date(data.start).toISOString().slice(0, 10) : ""
     );
+    const [url, setUrl] = useState(data.url || "");
 
     const handleSave = () => {
         if (deadline && new Date(start) > new Date(deadline)) {
@@ -29,13 +30,14 @@ const TaskDialog = ({ id, data }: { id: string; data: TaskData }) => {
             return;
         }
         handleClose();
-        const taskData = {
+        updateTaskData(id, {
+            ...data,
             label,
             description,
             start: start ? new Date(start) : null,
             deadline: deadline ? new Date(deadline) : null,
-        };
-        updateTaskData(id, taskData);
+            url,
+        } as TaskData);
     };
 
     const handleClose = () => {
@@ -49,6 +51,7 @@ const TaskDialog = ({ id, data }: { id: string; data: TaskData }) => {
         setStart(
             data.start ? new Date(data.start).toISOString().slice(0, 10) : ""
         );
+        setUrl(data.url || "");
     };
 
     return (
@@ -128,6 +131,17 @@ const TaskDialog = ({ id, data }: { id: string; data: TaskData }) => {
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                                 placeholder={"write description here..."}
+                                className="w-full"
+                            />
+                        </DataList.Value>
+                    </DataList.Item>
+                    <DataList.Item>
+                        <DataList.Label>URL</DataList.Label>
+                        <DataList.Value>
+                            <TextField.Root
+                                value={url}
+                                onChange={(e) => setUrl(e.target.value)}
+                                placeholder="https://example.com"
                                 className="w-full"
                             />
                         </DataList.Value>

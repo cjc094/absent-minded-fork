@@ -136,7 +136,7 @@ const useTaskViewModel = (): TaskViewModel => {
         try {
             const updated = tasks.map((task) =>
                 task.id === taskId
-                    ? { ...task, data: { ...task.data, ...newData } }
+                    ? { ...task, data: { ...(task.data ?? {}), ...newData } }
                     : task
             );
             setTasks(updated);

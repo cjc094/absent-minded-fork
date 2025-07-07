@@ -43,6 +43,18 @@ const TaskPreviewContent = ({ id, data }: { id: string; data: TaskData }) => {
                         {data.description === "" ? "-" : data.description}
                     </DataList.Value>
                 </DataList.Item>
+                <DataList.Item>
+                    <DataList.Label>URL</DataList.Label>
+                    <DataList.Value>
+                        {data.url ? (
+                            <a href={data.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+                                {data.url}
+                            </a>
+                        ) : (
+                            "-"
+                        )}
+                    </DataList.Value>
+                </DataList.Item>
             </DataList.Root>
         </HoverCard.Content>
     );
